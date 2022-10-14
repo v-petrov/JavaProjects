@@ -10,30 +10,37 @@ public class DefaultArticle implements Article {
     private String publishedAt;
     private String content;
 
+    @Override
     public DefaultSource getSource() {
         return source;
     }
 
+    @Override
     public String getAuthor() {
         return author;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }
 
+    @Override
     public String getUrlToImage() {
         return urlToImage;
     }
 
+    @Override
     public String getPublishedAt() {
         return publishedAt;
     }
 
+    @Override
     public String getContent() {
         return content;
     }

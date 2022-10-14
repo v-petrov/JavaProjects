@@ -1,0 +1,22 @@
+Examples for searching:
+
+By country: country=us
+Available countries: ae, ar, at, au, be, bg, br, ca, ch, cn, co, cu,
+cz, de, eg, fr, gb, gr, hk, hu, id, ie, il, in, it, jp, kr, lt, lv,
+ma, mx, my, ng, nl, no, nz, ph, pl, pt, ro, rs, ru, sa, se, sg, si,
+sk, th, tr, tw, ua, us, ve, za
+Note: you can't mix this param with the sources param.
+
+By category: category=business
+Available categories: business, entertainment, general,
+health, science, sports, technology
+Note: you can't mix this param with the sources param.
+
+By country and category: country=de&category=business
+Available countries and categories: same as above
+Note: you can't mix this param with the sources param.
+
+By source (one or more comma-separated): source=bbc-news   source=bbc-news,cnn
+Note: you can't mix this param with the country or category params.
+
+By keywords or a phrase: q=trump

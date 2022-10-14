@@ -7,8 +7,6 @@ import news.exceptions.TooManyRequests;
 import news.exceptions.Unauthorized;
 import news.fromjsontojava.Page;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,23 +14,15 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Connection {
-
-    private final Map<Integer, Page> pages;
-
     private final ManagingResponses manager;
     private String uri;
     private int previousPageNumber = 1;
     private int nextPageNumber = 2;
 
-    private int NumberOfPage = 1;
-
     public Connection() {
         this.uri = new GettingUri().getURI();
-        this.pages = new HashMap<>();
         this.manager = new ManagingResponses();
 
     }
@@ -59,12 +49,8 @@ public class Connection {
             manager.checkingForErrors(response);
 
             Page page = manager.createPage();
-            pages.put(NumberOfPage, page);
-            try (var writer = new BufferedWriter(new FileWriter(String.format("page%d.txt", NumberOfPage++)))) {
-                assert page != null;
-                writer.write(pages.get(NumberOfPage - 1).toString());
-                writer.flush();
-            }
+            manager.writingPageToFile(page);
+
             Files.delete(filePath);
 
             if (ff) {

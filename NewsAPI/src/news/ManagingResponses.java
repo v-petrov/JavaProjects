@@ -8,13 +8,17 @@ import news.exceptions.Unauthorized;
 import news.fromjsontojava.DefaultPage;
 import news.fromjsontojava.Page;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ManagingResponses {
+
+    private final Map<Integer, Page> pages = new HashMap<>();
+
+    private int NumberOfPage = 1;
 
     public void checkingForErrors(HttpResponse<Path> response) throws BadRequest, Unauthorized, TooManyRequests, ServerError {
         switch (response.statusCode()) {
@@ -43,6 +47,17 @@ public class ManagingResponses {
         } catch (IOException e) {
             System.out.println("Couldn't read from file!");
             return null;
+        }
+    }
+
+    public void writingPageToFile(Page page) {
+        pages.put(NumberOfPage, page);
+        try (var writer = new BufferedWriter(new FileWriter(String.format("page%d.txt", NumberOfPage++)))) {
+            assert page != null;
+            writer.write(pages.get(NumberOfPage - 1).toString());
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println("Couldn't write to the file!");
         }
     }
 }

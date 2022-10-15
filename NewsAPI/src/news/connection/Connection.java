@@ -21,14 +21,15 @@ public class Connection {
     private int previousPageNumber = 1;
     private int nextPageNumber = 2;
 
-    public Connection() {
+    private final static Connection connection = new Connection();
+
+    private static Connection getConnection() {
+        return connection;
+    }
+    private Connection() {
         this.uri = new GettingUri().getURI();
         this.manager = new ManagingResponses();
 
-    }
-
-    public static void main(String[] args) throws BadRequest, ServerError, TooManyRequests, Unauthorized, IOException, InterruptedException {
-        new Connection().connect();
     }
 
     public void connect() throws IOException, InterruptedException, BadRequest, ServerError, TooManyRequests, Unauthorized {

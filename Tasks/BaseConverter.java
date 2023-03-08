@@ -11,7 +11,7 @@ public class BaseConverter {
     public static void main(String[] args) {
         BaseConverter bc = new BaseConverter();
 
-        String num = "FFF";
+        String num = "ABC";
         int numBase = 16;
         int b = 2;
 
@@ -24,19 +24,21 @@ public class BaseConverter {
             res = new StringBuilder(num);
             return;
         }
+
+	if (a == 10) {
+	    converterToBBase(Integer.parseInt(num), b);
+	    return;
+	}
+
         int numInTen = 0;
         int power = 0;
         int currDigit;
-        StringBuilder inReverse = new StringBuilder();
 
-        for (int i = num.length() - 1; i >= 0; i--) {
-            inReverse.append(num.charAt(i));
-        }
-        for (char c : inReverse.toString().toCharArray()) {
-            if (chars.containsValue(c)) {
-                currDigit = c - 55;
+        for (int i = num.length() - 1; i >=0; i--) {
+            if (chars.containsValue(num.charAt(i))) {
+                currDigit = num.charAt(i) - 55;
             } else {
-                currDigit = c - '0';
+                currDigit = num.charAt(i) - '0';
             }
 
             numInTen += currDigit * Math.pow(a, power++);

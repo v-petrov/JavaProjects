@@ -7,7 +7,6 @@ import java.util.List;
 public class AppleDivision {
 
     public static void main(String[] args) {
-	// test buddy
         int[] appleWeights = {3, 2, 7, 4, 1};
         Arrays.sort(appleWeights);
         List<Integer> g1 = new ArrayList<>();

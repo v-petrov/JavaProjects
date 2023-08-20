@@ -30,6 +30,42 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public boolean validPalindrome(String s) {
+        int beg = 0, end = s.length() - 1;
+        boolean ff = true;
+        while (beg < end) {
+            if (s.charAt(beg) != s.charAt(end)) {
+                int f = beg;
+                int l = end;
+                beg++;
+                while (beg < end) {
+                    if (s.charAt(beg) != s.charAt(end)) {
+                        ff = false;
+                        break;
+                    }
+                    beg++;
+                    end--;
+                }
+                if (ff) {
+                    return true;
+                }
+                beg = f;
+                end = l;
+                end--;
+                while (beg < end) {
+                    if (s.charAt(beg) != s.charAt(end)) {
+                        return false;
+                    }
+                    beg++;
+                    end--;
+                }
+                return true;
+            }
+            beg++;
+            end--;
+        }
+        return true;
+    }
     public static boolean searchMatrix(int[][] matrix, int target) {
         int l = 0;
         int r = matrix.length * matrix[0].length - 1;

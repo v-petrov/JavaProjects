@@ -30,6 +30,18 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public boolean hasAlternatingBits(int n) {
+        int prev = -1;
+        while (n != 0) {
+            int currBit = n % 2;
+            if (prev != -1 && currBit == prev) {
+                return false;
+            }
+            n /= 2;
+            prev = currBit;
+        }
+        return true;
+    }
     public boolean validPalindrome(String s) {
         int beg = 0, end = s.length() - 1;
         boolean ff = true;

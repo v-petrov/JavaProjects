@@ -30,6 +30,26 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public String multiply(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0")) {
+            return "0";
+        }
+        int pow, resPow = 0, digit, num, currRes, res = 0;
+        for (int i = num2.length() - 1; i >= 0; i--) {
+            digit = Integer.parseInt(String.valueOf(num2.charAt(i)));
+            pow = num1.length() - 1;
+            currRes = 0;
+            for (int j = 0; j < num1.length(); j++) {
+                num = Integer.parseInt(String.valueOf(num1.charAt(j)));
+                num = (int) (num * Math.pow(10, pow--));
+                currRes += digit * num;
+            }
+            currRes = (int) (currRes * Math.pow(10, resPow++));
+            res += currRes;
+        }
+        String strRes = String.valueOf(res);
+        return strRes;
+    }
     public boolean hasAlternatingBits(int n) {
         int prev = -1;
         while (n != 0) {

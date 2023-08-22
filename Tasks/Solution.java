@@ -30,6 +30,18 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public int passThePillow(int n, int time) {
+        int k = time / (n - 1);
+        if (k == 0) {
+            return 1 + time;
+        }
+        if (k % 2 == 0) {
+            int m = time - k * (n - 1);
+            return 1 + m;
+        }
+        int l = time % (n - 1);
+        return n - l;
+    }
     public String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
             return "0";

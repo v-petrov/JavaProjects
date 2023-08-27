@@ -30,6 +30,17 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public boolean isAcronym(List<String> words, String s) {
+        if (words.size() != s.length()) {
+            return false;
+        }
+        for (int i = 0; i < words.size(); i++) {
+            if (words.get(i).charAt(0) != s.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
     public int lengthOfLastWord(String s) {
         int cnt = 0;
         for (int i = s.length() - 1; i >= 0; i--) {

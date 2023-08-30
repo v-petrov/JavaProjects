@@ -25,10 +25,56 @@ class Solution {
     static int maxDepthR = 1;
     static TreeNode newRoot = null;
     static TreeNode currNewRoot = null;
+    static private int ld = 0;
+    static private int rd = 0;
 
     public static void main(String[] args) {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
+    }
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode curr = stack.pop();
+            leftSubTree(curr.left, 0);
+            rightSubTree(curr.right, 0);
+            if (Math.abs(ld - rd) > 1) {
+                return false;
+            }
+            ld = 0;
+            rd = 0;
+            if (curr.left != null) {
+                stack.push(curr.left);
+            }
+            if (curr.right != null) {
+                stack.push(curr.right);
+            }
+        }
+        return true;
+    }
+    private void leftSubTree(TreeNode root, int d) {
+        if (root == null) {
+            if (d > ld) {
+                ld = d;
+            }
+            return;
+        }
+        leftSubTree(root.left, d + 1);
+        leftSubTree(root.right, d + 1);
+    }
+    private void rightSubTree(TreeNode root, int d) {
+        if (root == null) {
+            if (d > rd) {
+                rd = d;
+            }
+            return;
+        }
+        rightSubTree(root.left, d + 1);
+        rightSubTree(root.right, d + 1);
     }
     public boolean isAcronym(List<String> words, String s) {
         if (words.size() != s.length()) {

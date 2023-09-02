@@ -32,6 +32,39 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public int removeDuplicates(int[] nums) {
+        int cnt = 1;
+        int i = 0;
+        int begin = 0;
+        int len = nums.length - 1;
+        while (i < len) {
+            if (nums[i] == nums[i + 1]) {
+                cnt++;
+                if (cnt == 3) {
+                    begin = i + 1;
+                }
+            } else {
+                if (cnt > 2) {
+                    nums = overrideNums(nums, begin, i + 1);
+                    len -= (i + 1 - begin);
+                    i = begin - 1;
+                }
+                cnt = 1;
+            }
+            i++;
+        }
+        if (cnt >= 3) {
+            return begin;
+        } else {
+            return i + 1;
+        }
+    }
+    private int[] overrideNums(int[] nums, int begin, int diff) {
+        while (diff < nums.length) {
+            nums[begin++] = nums[diff++];
+        }
+        return nums;
+    }
     public ListNode removeElements(ListNode head, int val) {
         while (head != null) {
             if (head.val == val) {

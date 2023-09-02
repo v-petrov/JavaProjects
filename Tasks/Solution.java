@@ -32,6 +32,26 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public ListNode removeElements(ListNode head, int val) {
+        while (head != null) {
+            if (head.val == val) {
+                head = head.next;
+            } else {
+                break;
+            }
+        }
+        ListNode currHead = head;
+        ListNode prev = null;
+        while (currHead != null) {
+            if (currHead.val == val) {
+                prev.next = currHead.next;
+            } else {
+                prev = currHead;
+            }
+            currHead = currHead.next;
+        }
+        return head;
+    }
     public int bestClosingTime(String customers) {
         int count = 0;
         for (int i = 0; i < customers.length(); i++) {

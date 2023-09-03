@@ -32,6 +32,20 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode currNext = head;
+        while (currNext.next != null) {
+            if (currNext.val == currNext.next.val) {
+                currNext.next = currNext.next.next;
+            } else {
+                currNext = currNext.next;
+            }
+        }
+        return head;
+    }
     public void reorderList(ListNode head) {
         Stack<ListNode> s = new Stack<>();
         ListNode currHead = head;

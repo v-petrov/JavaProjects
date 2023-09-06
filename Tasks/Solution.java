@@ -33,6 +33,39 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public ListNode[] splitListToParts(ListNode head, int k) {
+        int size = sizeOfList(head);
+        int parts = size / k;
+        int remainder = size % k;
+        ListNode[] arrayOfNodes = new ListNode[k];
+        ListNode currHead = head;
+        int cnt;
+        int index = 0;
+        while (currHead != null) {
+            cnt = 0;
+            ListNode currIndexHead = currHead;
+            if (parts != 0 && remainder >= 1) {
+                cnt = 1;
+                remainder--;
+            }
+            for (int i = 1; i < parts + cnt; i++) {
+                currHead = currHead.next;
+            }
+            ListNode nextNode = currHead.next;
+            currHead.next = null;
+            arrayOfNodes[index++] = currIndexHead;
+            currHead = nextNode;
+        }
+        return arrayOfNodes;
+    }
+    private int sizeOfList(ListNode head) {
+        int cnt = 0;
+        while (head != null) {
+            cnt++;
+            head = head.next;
+        }
+        return cnt;
+    }
     static class NumArray {
     	public NumArray(int[] nums) {
         	this.prefixSum = new int[nums.length + 1];

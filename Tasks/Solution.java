@@ -27,11 +27,25 @@ class Solution {
     static TreeNode currNewRoot = null;
     static private int ld = 0;
     static private int rd = 0;
+    static private int[] prefixSum;
 
     public static void main(String[] args) {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    static class NumArray {
+    	public NumArray(int[] nums) {
+        	this.prefixSum = new int[nums.length + 1];
+
+        	for (int i = 1; i <= nums.length; i++) {
+            		prefixSum[i] = prefixSum[i - 1] + nums[i - 1];
+        	}
+    	}
+    
+    	public int sumRange(int left, int right) {
+        	return prefixSum[right + 1] - prefixSum[left];
+    	}
+    }	
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null || head.next == null) {
             return head;

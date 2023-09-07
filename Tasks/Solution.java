@@ -33,6 +33,17 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public int distributeCandies(int[] candyType) {
+        int numberOfCandies = candyType.length / 2;
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < candyType.length; i++) {
+            set.add(candyType[i]);
+            if (numberOfCandies == set.size()) {
+                return set.size();
+            }
+        }
+        return set.size();
+    }
     public ListNode[] splitListToParts(ListNode head, int k) {
         int size = sizeOfList(head);
         int parts = size / k;

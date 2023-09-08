@@ -33,6 +33,70 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public TreeNode deleteNode(TreeNode root, int key) {
+        TreeNode currRoot = root;
+        TreeNode del = null;
+        TreeNode succ = null;
+        TreeNode prev = null;
+        while (currRoot != null) {
+            if (currRoot.val == key) {
+                del = currRoot;
+                break;
+            } else if (currRoot.val > key) {
+                prev = currRoot;
+                currRoot = currRoot.left;
+            } else {
+                prev = currRoot;
+                currRoot = currRoot.right;
+            }
+        }
+        if (del != null) {
+            if (del.left == null && del.right == null) {
+                if (prev == null) {
+                    return null;
+                }
+                if (prev.left == del) {
+                    prev.left = null;
+                } else {
+                    prev.right = null;
+                }
+            } else if (del.left == null || del.right == null) {
+                if (prev == null) {
+                    if (root.left != null) {
+                        return root.left;
+                    } else {
+                        return root.right;
+                    }
+                } else if (prev.left == del) {
+                    if (del.left != null) {
+                        prev.left = del.left;
+                    } else {
+                        prev.left = del.right;
+                    }
+                } else {
+                    if (del.left != null) {
+                        prev.right = del.left;
+                    } else {
+                        prev.right = del.right;
+                    }
+                }
+            } else {
+                currRoot = del.right;
+                while (currRoot != null) {
+                    prev = succ;
+                    succ = currRoot;
+                    currRoot = currRoot.left;
+                }
+                del.val = succ.val;
+                if (prev == null) {
+                    del.right = succ.right;
+                } else {
+                    prev.left = succ.right;
+                }
+            }
+        }
+        return root;    
+    }
     public int distributeCandies(int[] candyType) {
         int numberOfCandies = candyType.length / 2;
         Set<Integer> set = new HashSet<>();

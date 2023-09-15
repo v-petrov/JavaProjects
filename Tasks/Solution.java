@@ -33,6 +33,23 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        ListNode currHead = head;
+        while (currHead.next != null) {
+            ListNode newNode = gcd(currHead.val, currHead.next.val);
+            ListNode nextNode = currHead.next;
+            currHead.next = newNode;
+            newNode.next = nextNode;
+            currHead = currHead.next.next;
+        }
+        return head;
+    }
+    private ListNode gcd(int f, int s) {
+        if (s == 0) {
+            return new ListNode(f);
+        }
+        return gcd(s, f % s);
+    }
     public TreeNode deleteNode(TreeNode root, int key) {
         TreeNode currRoot = root;
         TreeNode del = null;

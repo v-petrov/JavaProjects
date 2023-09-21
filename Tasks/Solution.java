@@ -33,6 +33,21 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public boolean isUnivalTree(TreeNode root) {
+        return m(-1, root);
+    }
+    private boolean m(int prevVal, TreeNode root) {
+        if (prevVal != -1) {
+            if (root != null) {
+                if (prevVal != root.val) {
+                    return false;   
+                }
+            } else {
+                return true;
+            }
+        }
+        return m(root.val, root.left) && m(root.val, root.right);
+    }
     public ListNode insertGreatestCommonDivisors(ListNode head) {
         ListNode currHead = head;
         while (currHead.next != null) {

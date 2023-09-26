@@ -33,6 +33,24 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public boolean isStrictlyPalindromic(int n) {
+        for (int i = 2; i <= n - 2; i++) {
+            if (!isPalindromicInBaseB(n, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private boolean isPalindromicInBaseB(int n, int base) {
+        StringBuilder st = new StringBuilder();
+        int d;
+        while (n != 0) {
+            d = n % base;
+            n /= base;
+            st.append(d);
+        }
+        return st.toString().equals(st.reverse().toString());
+    } 
     public boolean isUnivalTree(TreeNode root) {
         return m(-1, root);
     }

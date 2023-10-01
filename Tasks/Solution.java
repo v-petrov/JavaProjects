@@ -33,6 +33,28 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public ListNode mergeNodes(ListNode head) {
+        ListNode newHead = null;
+        ListNode curr = null;
+        head = head.next;
+        int sum = 0;
+        while (head != null) {
+            if (head.val != 0) {
+                sum += head.val;
+            } else {
+                if (newHead == null) {
+                    newHead = new ListNode(sum);
+                    curr = newHead;
+                } else {
+                    curr.next = new ListNode(sum);
+                    curr = curr.next;
+                }
+                sum = 0;
+            }
+            head = head.next;
+        }
+        return newHead;
+    }
     public boolean isStrictlyPalindromic(int n) {
         for (int i = 2; i <= n - 2; i++) {
             if (!isPalindromicInBaseB(n, i)) {

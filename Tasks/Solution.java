@@ -33,6 +33,33 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public boolean winnerOfGame(String colors) {
+        if (colors.length() < 3) {
+            return false;
+        }
+        int a = possibleMoves('A', colors);
+        int b = possibleMoves('B', colors);
+
+        return a > b;
+    }
+    private int possibleMoves(char c, String col) {
+        int cnt = 0;
+        int moves = 0;
+        for (int i = 0; i < col.length(); i++) {
+            if (col.charAt(i) == c) {
+                cnt++;
+            } else {
+                if (cnt > 2) {
+                    moves += cnt - 2;
+                }
+                cnt = 0;
+            }
+        }
+        if (cnt > 2) {
+            moves += cnt - 2;
+        }
+        return moves;
+    }
     public ListNode mergeNodes(ListNode head) {
         ListNode newHead = null;
         ListNode curr = null;

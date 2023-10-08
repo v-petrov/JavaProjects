@@ -33,6 +33,27 @@ class Solution {
         int[][] matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 13));
     }
+    public String convertToBase7(int num) {
+        if (num == 0) {
+            return "0";
+        }
+        StringBuilder s = new StringBuilder();
+        if (num < 0) {
+            num = Math.abs(num);
+            s.append('-');
+        }
+        s = base7(s, num);
+        return s.toString();
+    }
+    private StringBuilder base7(StringBuilder s, int num) {
+        if (num == 0) {
+            return s;
+        }
+        int rem = num % 7;
+        s = base7(s, num / 7);
+        s.append(rem);
+        return s;
+    }
     public boolean winnerOfGame(String colors) {
         if (colors.length() < 3) {
             return false;
